@@ -1,3 +1,4 @@
+#include "so_long.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -5,31 +6,44 @@
 
 #define WIDTH 512
 #define HEIGHT 512
+#define CUBE_SIZE 100
+#define BACKGROUND_COLOR 0xADD8E6FF
+#define CUBE_COLOR 0xFF69B4FF
 
 static mlx_image_t* image;
+static mlx_image_t* background;
 
-// -----------------------------------------------------------------------------
-
-int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
+void ft_background(void)
 {
-    return (r << 24 | g << 16 | b << 8 | a);
+	uint32_t	i = 0;
+	uint32_t	y = 0;
+
+	while (i < WIDTH)
+	{
+		y = 0;
+		while (y < HEIGHT)
+		{
+			mlx_put_pixel(background, i, y, BACKGROUND_COLOR);
+			y++;
+		}
+		i++;
+	}
 }
 
-void ft_randomize(void* param)
+void ft_cube(void)
 {
-	(void)param;
-	for (uint32_t i = 0; i < image->width; ++i)
+	uint32_t	i = 0;
+	uint32_t	y = 0;
+
+	while (i < CUBE_SIZE)
 	{
-		for (uint32_t y = 0; y < image->height; ++y)
+		y = 0;
+		while (y < CUBE_SIZE)
 		{
-			uint32_t color = ft_pixel(
-				rand() % 0xFF, // R
-				rand() % 0xFF, // G
-				rand() % 0xFF, // B
-				rand() % 0xFF  // A
-			);
-			mlx_put_pixel(image, i, y, color);
+			mlx_put_pixel(image, i, y, CUBE_COLOR);
+			y++;
 		}
+		i++;
 	}
 }
 
@@ -49,35 +63,39 @@ void ft_hook(void* param)
 		image->instances[0].x += 5;
 }
 
-// -----------------------------------------------------------------------------
-
 int32_t main(void)
 {
 	mlx_t* mlx;
 
-	// Gotta error check this stuff
 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (!(image = mlx_new_image(mlx, 128, 128)))
+	if (!(background = mlx_new_image(mlx, WIDTH, HEIGHT)))
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
+	if (!(image = mlx_new_image(mlx, CUBE_SIZE, CUBE_SIZE)))
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
+
+	ft_background();
+	ft_cube();
+
+	mlx_image_to_window(mlx, background, 0, 0);
+	mlx_image_to_window(mlx, image, 0, 0);
 	
-	mlx_loop_hook(mlx, ft_randomize, mlx);
 	mlx_loop_hook(mlx, ft_hook, mlx);
 
 	mlx_loop(mlx);
+
 	mlx_terminate(mlx);
+	
 	return (EXIT_SUCCESS);
 }

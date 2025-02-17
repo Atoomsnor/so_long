@@ -1,18 +1,20 @@
-NAME = so_long
-LIBFT = libft/libft.a
-PRINTF = libft/printf/printf.a
-SRCDIR = source
-SRCLIT = main.c handling_stack.c sorting.c ins_swap.c ins_rotate.c ins_reverse.c ins_push.c
+NAME	= so_long
+LIBFT	= libft/libft.a
+PRINTF	= libft/printf/printf.a
+GNL		= libft/get_next_line/get_next_line.a
+SRCDIR	= source
+SRCLIT	= My_test.c
 SRCS	= $(addprefix $(SRCDIR)/,$(SRCLIT))
 OBJ		= $(SRCS:.c=.o)
-CC = cc
-INCLUDE = -I ./include
-CFLAGS = -Wall -Wextra -Werror
+CC		= cc
+INCLUDE	= -I ./include
+LIBS	= -L MLX42/build -lmlx42 -ldl -lglfw -pthread -lm
+CFLAGS	= -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(PRINTF) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(PRINTF) $(GNL) $(LIBS) -o $(NAME)
 
 $(LIBFT): 
 	$(MAKE) -C libft
