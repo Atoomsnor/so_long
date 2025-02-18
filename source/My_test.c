@@ -1,3 +1,4 @@
+
 #include "so_long.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,27 +13,31 @@
 static mlx_image_t* image;
 static mlx_image_t* background;
 
-void ft_background(void)
+void ft_background(mlx_t* mlx)
 {
-	uint32_t	i = 0;
-	uint32_t	y = 0;
+	int	x;
+	int	y;
+	mlx_texture_t* texture = mlx_load_png("./images/floor.png");
+	background = mlx_texture_to_image(mlx, texture);
+	mlx_delete_texture(texture);
 
-	while (i < WIDTH)
+	y = 0;
+	while (y < (WIDTH / 32))
 	{
-		y = 0;
-		while (y < HEIGHT)
+		x = 0;
+		while (x < (HEIGHT / 32))
 		{
-			mlx_put_pixel(background, i, y, BACKGROUND_COLOR);
-			y++;
+			mlx_image_to_window(mlx, background, x * 32, y * 32);
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
 
 void ft_cube(void)
 {
-	uint32_t	i = 0;
-	uint32_t	y = 0;
+	uint32_t i = 0;
+	uint32_t y = 0;
 
 	while (i < CUBE_SIZE)
 	{
@@ -84,10 +89,10 @@ int32_t main(void)
 		return(EXIT_FAILURE);
 	}
 
-	ft_background();
+	ft_background(mlx);
 	ft_cube();
 
-	mlx_image_to_window(mlx, background, 0, 0);
+	// mlx_image_to_window(mlx, background, 0, 0);
 	mlx_image_to_window(mlx, image, 0, 0);
 	
 	mlx_loop_hook(mlx, ft_hook, mlx);
