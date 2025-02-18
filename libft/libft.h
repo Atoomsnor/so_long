@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:49:12 by roversch          #+#    #+#             */
-/*   Updated: 2025/02/17 13:49:44 by roversch         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:07:41 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int		ft_isprint(int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 void	ft_putstr(const char *s);
-void	ft_bzero(void *s, int n);
+void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
-void	*ft_memcpy(void *dest, const void *src, int n);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
-void	*ft_memset(void *str, int c, int n);
+void	*ft_memset(void *s, int c, size_t n);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 size_t	ft_strlcat(char *dest, const char *src, size_t n);
@@ -52,4 +52,7 @@ char	**ft_split(char const *s, char c);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strtrim(char const *s1, char const *set);
+
+int		ft_printf(const char *str, ...);
+char	*get_next_line(int fd);
 #endif

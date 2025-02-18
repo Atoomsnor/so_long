@@ -6,11 +6,11 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 14:20:25 by roversch          #+#    #+#             */
-/*   Updated: 2025/02/17 13:58:42 by roversch         ###   ########.fr       */
+/*   Updated: 2025/02/18 12:59:49 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <get_next_line.h>
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {

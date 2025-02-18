@@ -6,11 +6,11 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 14:20:22 by roversch          #+#    #+#             */
-/*   Updated: 2025/02/17 13:58:50 by roversch         ###   ########.fr       */
+/*   Updated: 2025/02/18 12:59:42 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <get_next_line.h>
+#include "get_next_line.h"
 #include <unistd.h>
 
 char	*get_the_line(int fd, char *leftovers, char *buffer)

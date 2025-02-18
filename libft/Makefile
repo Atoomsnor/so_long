@@ -6,7 +6,7 @@
 #    By: roversch <roversch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 15:49:19 by roversch          #+#    #+#              #
-#    Updated: 2025/02/17 14:10:25 by roversch         ###   ########.fr        #
+#    Updated: 2025/02/18 13:01:02 by roversch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,33 +23,45 @@ ft_toupper.c
 OBJ = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-INCLUDE = -I ./include
+INCLUDE = -I ./include -I printf/include -I get_next_line/include
 
-PRINTF_DIR = printf
-PRINTF_NAME = printf.a
+# Directories
+PRINTF_DIR = printf/source
+GNL_DIR = get_next_line/source
 
-GNL_DIR = get_next_line
-GNL_NAME = get_next_line.a
+# Source files for printf & get_next_line
+PRINTF_SRC = ft_printf.c printf_base10.c printf_base16.c printf_chars.c
+GNL_SRC = get_next_line.c get_next_line_utils.c
+
+# Object files for printf & get_next_line (fixed)
+PRINTF_OBJ = $(addprefix $(PRINTF_DIR)/, $(PRINTF_SRC:.c=.o))
+GNL_OBJ = $(addprefix $(GNL_DIR)/, $(GNL_SRC:.c=.o))
+
+# All object files
+ALL_OBJ = $(OBJ) $(PRINTF_OBJ) $(GNL_OBJ)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@$(MAKE) -C $(PRINTF_DIR)
-	@$(MAKE) -C $(GNL_DIR)
-	@ar rc $(NAME) $(OBJ)
+$(NAME): $(ALL_OBJ)
+	@ar rc $(NAME) $(ALL_OBJ)
 
+# Compile libft objects
 %.o: %.c
-	@$(CC) -c $(CFLAGS) -c $< -o $@ $(INCLUDE)
+	@$(CC) -c $(CFLAGS) -o $@ $< $(INCLUDE)
+
+# Compile printf objects correctly
+$(PRINTF_DIR)/%.o: $(PRINTF_DIR)/%.c
+	@$(CC) -c $(CFLAGS) -o $@ $< $(INCLUDE)
+
+# Compile get_next_line objects correctly
+$(GNL_DIR)/%.o: $(GNL_DIR)/%.c
+	@$(CC) -c $(CFLAGS) -o $@ $< $(INCLUDE)
 
 clean:
-	@rm -f $(OBJ)
-	@$(MAKE) -C $(PRINTF_DIR) clean
-	@$(MAKE) -C $(GNL_DIR) clean
+	@rm -f $(OBJ) $(PRINTF_OBJ) $(GNL_OBJ)
 
 fclean: clean
 	@rm -f $(NAME)
-	@$(MAKE) -C $(PRINTF_DIR) fclean
-	@$(MAKE) -C $(GNL_DIR) fclean
 
 re: fclean all
 
