@@ -4,67 +4,59 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define WIDTH 512
-#define HEIGHT 512
-#define CUBE_SIZE 100
-#define BACKGROUND_COLOR 0xADD8E6FF
-#define CUBE_COLOR 0xFF69B4FF
+#define WIDTH 320
+#define HEIGHT 320
 
-static mlx_image_t* image;
-static mlx_image_t* background;
+static t_textures textures;
+static t_images images;
+
+void get_textures_and_images(mlx_t* mlx)
+{
+	textures.floor = mlx_load_png("./images/floor.png");
+	textures.player = mlx_load_png("./images/spook32.png");
+	images.floor = mlx_texture_to_image(mlx, textures.floor);
+	images.player = mlx_texture_to_image(mlx, textures.player);
+	mlx_delete_texture(textures.floor);
+	mlx_delete_texture(textures.player);
+}
 
 void ft_background(mlx_t* mlx)
 {
 	int	x;
 	int	y;
-	mlx_texture_t* texture = mlx_load_png("./images/floor.png");
-	background = mlx_texture_to_image(mlx, texture);
-	mlx_delete_texture(texture);
 
-	y = 0;
-	while (y < (WIDTH / 32))
+	x = 0;
+	while (x < (WIDTH / 32))
 	{
-		x = 0;
-		while (x < (HEIGHT / 32))
+		y = 0;
+		while (y < (HEIGHT / 32))
 		{
-			mlx_image_to_window(mlx, background, x * 32, y * 32);
-			x++;
+			mlx_image_to_window(mlx, images.floor, x * 32, y * 32);
+			y++;
 		}
-		y++;
+		x++;
 	}
 }
 
-void ft_cube(void)
+void ft_player(mlx_t* mlx)
 {
-	uint32_t i = 0;
-	uint32_t y = 0;
-
-	while (i < CUBE_SIZE)
-	{
-		y = 0;
-		while (y < CUBE_SIZE)
-		{
-			mlx_put_pixel(image, i, y, CUBE_COLOR);
-			y++;
-		}
-		i++;
-	}
+	mlx_image_to_window(mlx, images.player, 0, 0);
 }
 
 void ft_hook(void* param)
 {
 	mlx_t* mlx = param;
-
+	
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		image->instances[0].y -= 5;
+		images.player->instances[0].y -= 32;
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		image->instances[0].y += 5;
+		images.player->instances[0].y += 32;
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		image->instances[0].x -= 5;
+		images.player->instances[0].x -= 32;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		image->instances[0].x += 5;
+		images.player->instances[0].x += 32;
 }
 
 int32_t main(void)
@@ -76,24 +68,11 @@ int32_t main(void)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (!(background = mlx_new_image(mlx, WIDTH, HEIGHT)))
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (!(image = mlx_new_image(mlx, CUBE_SIZE, CUBE_SIZE)))
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
 
+	get_textures_and_images(mlx);
+	
 	ft_background(mlx);
-	ft_cube();
-
-	// mlx_image_to_window(mlx, background, 0, 0);
-	mlx_image_to_window(mlx, image, 0, 0);
+	ft_player(mlx);
 	
 	mlx_loop_hook(mlx, ft_hook, mlx);
 
