@@ -1,7 +1,7 @@
 NAME	= so_long
 LIBFT	= libft/libft.a
 SRCDIR	= source
-SRCLIT	= My_test.c
+SRCLIT	= main.c images.c map.c move.c
 SRCS	= $(addprefix $(SRCDIR)/,$(SRCLIT))
 OBJ		= $(SRCS:.c=.o)
 CC		= cc

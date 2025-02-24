@@ -43,20 +43,23 @@ void ft_player(mlx_t* mlx)
 	mlx_image_to_window(mlx, images.player, 0, 0);
 }
 
-void ft_hook(void* param)
+void ft_key_hook(mlx_key_data_t keydata, void* param)
 {
 	mlx_t* mlx = param;
-	
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		images.player->instances[0].y -= 32;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		images.player->instances[0].y += 32;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		images.player->instances[0].x -= 32;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		images.player->instances[0].x += 32;
+
+	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+	{	
+		if (keydata.key == MLX_KEY_ESCAPE)
+			mlx_close_window(mlx);
+		else if (keydata.key == MLX_KEY_UP)
+			images.player->instances[0].y -= 32;
+		else if (keydata.key == MLX_KEY_DOWN)
+			images.player->instances[0].y += 32;
+		else if (keydata.key == MLX_KEY_LEFT)
+			images.player->instances[0].x -= 32;
+		else if (keydata.key == MLX_KEY_RIGHT)
+			images.player->instances[0].x += 32;
+	}
 }
 
 int32_t main(void)
@@ -74,7 +77,7 @@ int32_t main(void)
 	ft_background(mlx);
 	ft_player(mlx);
 	
-	mlx_loop_hook(mlx, ft_hook, mlx);
+	mlx_key_hook(mlx, ft_key_hook, mlx);
 
 	mlx_loop(mlx);
 
