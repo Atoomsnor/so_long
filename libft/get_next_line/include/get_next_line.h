@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 14:20:30 by roversch          #+#    #+#             */
-/*   Updated: 2025/01/15 15:07:50 by roversch         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:04:28 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ typedef enum t_file_status
 char	*get_the_line(int fd, char *leftover, char *buffer);
 char	*store_leftovers(char **line);
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strdup(const char *s);
-char	*ft_strchr(char *s, int c);
+size_t	gnl_strlen(const char *s);
+char	*gnl_strjoin(char const *s1, char const *s2);
+char	*gnl_substr(char const *s, unsigned int start, size_t len);
+char	*gnl_strdup(const char *s);
+char	*gnl_strchr(char *s, int c);
 
 #endif

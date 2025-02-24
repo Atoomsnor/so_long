@@ -5,7 +5,7 @@ SRCLIT	= main.c images.c map.c move.c
 SRCS	= $(addprefix $(SRCDIR)/,$(SRCLIT))
 OBJ		= $(SRCS:.c=.o)
 CC		= cc
-INCLUDE	= -I ./include -I libft -I MLX42/include
+INCLUDE	= -I ./include -I libft/ -I MLX42/include
 LIBS	= -L MLX42/build -lmlx42 -ldl -lglfw -pthread -lm
 CFLAGS	= -Wall -Wextra -Werror
 

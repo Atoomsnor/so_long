@@ -1,24 +1,106 @@
 #include "so_long.h"
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
 
-void	draw_floor(t_game *game)
+void	map_size(t_game *game, char **map)
 {
-	int	x;
-	int	y;
+	int	i;
 
-	x = 0;
-	while (x < (game->map_width / 32))
+	i = 0;
+	game->map_width = ft_strlen(map[0]) * 32 - 32;
+	while (map[i])
+		i++;
+	game->map_heigth = i * 32;
+}
+
+
+
+
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
 	{
-		y = 0;
-		while (y < (game->map_heigth / 32))
-		{
-			mlx_image_to_window(game->mlx, game->img->floor, x * 32, y * 32);
-			y++;
-		}
-		x++;
+		free(map[i]);
+		i++;
 	}
+	free(map);
 }
 
-void ft_player(t_game *game)
+char	**read_map(char *argv_map)
 {
-	mlx_image_to_window(game->mlx, game->img->player, 0, 0);
+	int		i;
+	int		fd;
+	int		lines;
+	char	**map;
+	char	*temp;
+
+	lines = 0;
+	fd = open(argv_map, O_RDONLY);
+	while ((temp = get_next_line(fd)) != NULL)
+	{
+		lines++;
+		free(temp);
+	}
+	close(fd);
+	map = malloc(sizeof(char *) * (lines + 1));
+	fd = open(argv_map, O_RDONLY);
+	i = 0;
+	while (i < lines)
+	{
+		map[i] = get_next_line(fd);
+		printf("%s", map[i]);
+		i++;
+	}
+	map[i] = NULL;
+	close(fd);
+	return (map);
 }
+
+// char	**read_map(char *argv_map)
+// {
+// 	int		i;
+// 	int		fd;
+// 	int		lines;
+// 	char	**map;
+// 	char	*temp;
+
+// 	lines = 0;
+// 	fd = open(argv_map, O_RDONLY);
+// 	if (fd < 0)
+// 		return (0);
+// 	while ((temp = get_next_line(fd)) != NULL)
+// 	{
+// 		lines++;
+// 		free(temp);
+// 	}
+// 	close(fd);
+// 	map = malloc(sizeof(char *) * (lines + 1));
+// 	if (!map)
+// 		return (0);
+// 	fd = open(argv_map, O_RDONLY);
+// 	if (fd < 0)
+// 	{
+// 		free(map);
+// 		return (0);
+// 	}
+// 	i = 0;
+// 	while (i < lines)
+// 	{
+// 		map[i] = get_next_line(fd);
+// 		if (!map[i])
+// 		{
+// 			free_map(map);
+// 			close(fd);
+// 			return (0);
+// 		}
+// 		printf("%s", map[i]);
+// 		i++;
+// 	}
+// 	map[i] = NULL;
+// 	close(fd);
+// 	return (map);
+// }

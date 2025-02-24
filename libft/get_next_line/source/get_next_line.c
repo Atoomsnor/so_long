@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 14:20:22 by roversch          #+#    #+#             */
-/*   Updated: 2025/02/18 12:59:42 by roversch         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:04:03 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_the_line(int fd, char *leftovers, char *buffer)
 	char	*temp_leftovers;
 
 	bytes_read = 1;
-	while (bytes_read > 0 && !ft_strchr(leftovers, '\n'))
+	while (bytes_read > 0 && !gnl_strchr(leftovers, '\n'))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == READ_ERROR)
@@ -28,11 +28,11 @@ char	*get_the_line(int fd, char *leftovers, char *buffer)
 			break ;
 		buffer[bytes_read] = '\0';
 		if (!leftovers)
-			leftovers = ft_strdup("");
+			leftovers = gnl_strdup("");
 		if (!leftovers)
 			return (NULL);
 		temp_leftovers = leftovers;
-		leftovers = ft_strjoin(temp_leftovers, buffer);
+		leftovers = gnl_strjoin(temp_leftovers, buffer);
 		free(temp_leftovers);
 		if (!leftovers)
 			return (NULL);
@@ -53,10 +53,10 @@ char	*store_leftovers(char **line)
 		i++;
 	if ((*line)[i] == '\0')
 		return (NULL);
-	leftovers = ft_substr(*line, i + 1, ft_strlen(*line) - i - 1);
+	leftovers = gnl_substr(*line, i + 1, gnl_strlen(*line) - i - 1);
 	if (!leftovers)
 		return (NULL);
-	temp_line = ft_substr(*line, 0, i + 1);
+	temp_line = gnl_substr(*line, 0, i + 1);
 	if (*leftovers == '\0' || !temp_line)
 	{
 		free(leftovers);
