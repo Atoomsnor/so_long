@@ -33,6 +33,8 @@ typedef struct s_game
 	int					map_heigth;
 }	t_game;
 
+int		check_rectangle(char **map);
+
 void	map_size(t_game *game, char **map);
 void	free_map(char **map);
 char	**read_map(char *argv_map);

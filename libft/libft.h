@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:49:12 by roversch          #+#    #+#             */
-/*   Updated: 2025/02/24 15:00:42 by roversch         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:40:32 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stddef.h>
 
-int		ft_strlen(const char *c);
+size_t	ft_strlen(const char *c);
 int		ft_atoi(const char *nptr);
 long	ft_atol(const char *nptr);
 char	*ft_itoa(int n);

@@ -31,7 +31,10 @@ int	main(int argc, char **argv)
 		printf("Failed to load map\n");
 		return (1);
 	}
+	if (check_rectangle(game.map) == 1)
+		return(free_map(game.map), 1);
 	map_size(&game, game.map);
+	//make sure map is solvable with flood?
 	init_game(&game);
 	return (0);
 }

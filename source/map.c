@@ -14,9 +14,6 @@ void	map_size(t_game *game, char **map)
 	game->map_heigth = i * 32;
 }
 
-
-
-
 void	free_map(char **map)
 {
 	int	i;
