@@ -8,10 +8,10 @@ void	map_size(t_game *game, char **map)
 	int	i;
 
 	i = 0;
-	game->map_width = ft_strlen(map[0]) * 32 - 32;
+	game->map_width = ft_strlen(map[0]) * 128 - 128;
 	while (map[i])
 		i++;
-	game->map_heigth = i * 32;
+	game->map_heigth = i * 128;
 }
 
 void	free_map(char **map)

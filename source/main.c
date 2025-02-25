@@ -8,8 +8,10 @@ int	init_game(t_game *game)
 	get_textures(game);
 	get_images(game);
 	// draw_map(game, game->img);
-	draw_floor(game);
-	ft_player(game);
+	draw_map(game);
+	draw_conditions(game);
+	// ft_player(game);
+	// ft_test(game);
 	mlx_key_hook(game->mlx, ft_key_hook, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);

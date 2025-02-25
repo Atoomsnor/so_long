@@ -4,14 +4,22 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <stdlib.h>
 
+# define MAP_FLOOR '0'
+# define MAP_WALL '1'
+# define MAP_PLAYER 'P'
+# define MAP_COLLECT 'C'
+# define MAP_EXIT 'E'
+// # define MAP_ENEMY 'x'
 
 typedef struct s_textures
 {
 	mlx_texture_t	*floor;
 	mlx_texture_t	*wall;
 	mlx_texture_t	*player;
-	mlx_texture_t	*pickup;
+	mlx_texture_t	*collect;
 	mlx_texture_t	*exit;
+	mlx_texture_t	*open;
+	mlx_texture_t	*enemy;
 }	t_textures;
 
 typedef struct s_images
@@ -19,8 +27,10 @@ typedef struct s_images
 	mlx_image_t		*floor;
 	mlx_image_t		*wall;
 	mlx_image_t		*player;
-	mlx_image_t		*pickup;
+	mlx_image_t		*collect;
 	mlx_image_t		*exit;
+	mlx_image_t		*open;
+	mlx_image_t		*enemy;
 }	t_images;
 
 typedef struct s_game
@@ -41,8 +51,10 @@ char	**read_map(char *argv_map);
 
 void	get_textures(t_game *game);
 void	get_images(t_game *game);
-void	draw_floor(t_game *game);
-void	ft_player(t_game *game);
+void	draw_map(t_game *game);
+void	draw_conditions(t_game *game);
+// void	ft_test(t_game *game);
+// void	ft_player(t_game *game);
 
 void	ft_key_hook(mlx_key_data_t keydata, void* param);
 
