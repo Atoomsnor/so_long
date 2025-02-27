@@ -9,6 +9,7 @@
 # define MAP_PLAYER 'P'
 # define MAP_COLLECT 'C'
 # define MAP_EXIT 'E'
+# define TILE 128
 // # define MAP_ENEMY 'x'
 
 typedef struct s_textures
@@ -41,6 +42,8 @@ typedef struct s_game
 	char				**map;
 	int					map_width;
 	int					map_heigth;
+	int					move_count;
+	int					collec_count;
 }	t_game;
 
 int		check_rectangle(char **map);

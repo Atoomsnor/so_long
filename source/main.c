@@ -4,6 +4,8 @@
 
 int	init_game(t_game *game)
 {
+	game->move_count = 0;
+	game->collec_count = 0;
 	game->mlx = mlx_init(game->map_width, game->map_heigth, "so_long", false); //check !fail
 	get_textures(game);
 	get_images(game);
@@ -26,7 +28,7 @@ int	main(int argc, char **argv)
 
 	(void) argc;
 	// (void) argv;
-	
+
 	game.map = read_map(argv[1]);
 	if (!game.map)
 	{
