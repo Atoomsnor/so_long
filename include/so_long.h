@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:23:14 by roversch          #+#    #+#             */
-/*   Updated: 2025/02/27 17:23:58 by roversch         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:27:48 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	move_up(t_game *game);
 void	move_down(t_game *game);
 void	move_left(t_game *game);
 void	move_right(t_game *game);
-void	ft_key_hook(mlx_key_data_t keydata, void *param);
+void	ft_key_hook(mlx_key_data_t keydata, void* param);
 
 void	collect_found(t_game *game);
 void	exit_found(t_game *game);

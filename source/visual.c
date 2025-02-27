@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:19:57 by roversch          #+#    #+#             */
-/*   Updated: 2025/02/27 17:21:51 by roversch         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:07:08 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	get_textures(t_game *game)
 {
 	game->txt = ft_calloc(1, sizeof(t_textures));
-	game->txt->floor = mlx_load_png("./images/backgroundTILE.png");
-	game->txt->wall = mlx_load_png("./images/wallTILE.png");
-	game->txt->player = mlx_load_png("./images/mouseTILE.png");
-	game->txt->collect = mlx_load_png("./images/cheeseTILE.png");
-	game->txt->exit = mlx_load_png("./images/exitTILE.png");
-	game->txt->open = mlx_load_png("./images/openTILE.png");
-	game->txt->enemy = mlx_load_png("./images/spookTILE.png");
+	game->txt->floor = mlx_load_png("./images/background128.png");
+	game->txt->wall = mlx_load_png("./images/2wall128.png");
+	game->txt->player = mlx_load_png("./images/mouse128.png");
+	game->txt->collect = mlx_load_png("./images/cheese128.png");
+	game->txt->exit = mlx_load_png("./images/exit128.png");
+	game->txt->open = mlx_load_png("./images/open128.png");
+	game->txt->enemy = mlx_load_png("./images/spook128.png");
 }
 
 void	get_images(t_game *game)
