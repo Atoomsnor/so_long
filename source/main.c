@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 17:16:38 by roversch          #+#    #+#             */
+/*   Updated: 2025/02/27 17:18:03 by roversch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 #include <stdio.h>
 #include <unistd.h>
@@ -26,8 +38,6 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	(void) argc;
-	// (void) argv;
-
 	game.map = read_map(argv[1]);
 	if (!game.map)
 	{
