@@ -9,6 +9,9 @@
 # define MAP_PLAYER 'P'
 # define MAP_COLLECT 'C'
 # define MAP_EXIT 'E'
+
+# define PLAYER_Y game->img->player->instances->y
+# define PLAYER_X game->img->player->instances->x
 # define TILE 128
 // # define MAP_ENEMY 'x'
 
@@ -43,7 +46,8 @@ typedef struct s_game
 	int					map_width;
 	int					map_heigth;
 	int					move_count;
-	int					collec_count;
+	int					collect_count;
+	int					collect_amount;
 }	t_game;
 
 int		check_rectangle(char **map);
@@ -54,11 +58,16 @@ char	**read_map(char *argv_map);
 
 void	get_textures(t_game *game);
 void	get_images(t_game *game);
-void	draw_map(t_game *game);
-void	draw_conditions(t_game *game);
-// void	ft_test(t_game *game);
-// void	ft_player(t_game *game);
+void	put_map(t_game *game);
+void	put_objects(t_game *game);
 
+void	move_up(t_game *game, int step_y, int step_x);
+void	move_down(t_game *game, int step_y, int step_x);
+void	move_left(t_game *game, int step_y, int step_x);
+void	move_right(t_game *game);
 void	ft_key_hook(mlx_key_data_t keydata, void* param);
+
+void	collect_found(t_game *game);
+void	exit_found(t_game *game);
 
 #endif

@@ -1,57 +1,57 @@
 #include "so_long.h"
 
-void	move_up(t_game *game, int new_y, int new_x)
+void	move_up(t_game *game, int step_y, int step_x)
 {
-	if (game->map[new_y - 1][new_x] != MAP_WALL)
+	if (game->map[step_y - 1][step_x] != MAP_WALL)
 	{
-		// if (game->map[new_y - 1][new_x] == MAP_COLLECT)
-		// 	ft_printf("Collect");
-		// else if (game->map[new_y - 1][new_x] == MAP_EXIT)
+		// if (game->map[step_y - 1][step_x] == MAP_COLLECT)
+		// 	collect_pickup(game);
+		// else if (game->map[step_y - 1][step_x] == MAP_EXIT)
 		// 	ft_printf("Exit");
-		game->img->player->instances->y -= TILE;
+		PLAYER_Y -= TILE;
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
 	}
 }
 
-void	move_down(t_game *game, int new_y, int new_x)
+void	move_down(t_game *game, int step_y, int step_x)
 {
-	if (game->map[new_y + 1][new_x] != MAP_WALL)
+	if (game->map[step_y + 1][step_x] != MAP_WALL)
 	{
-		// if (game->map[new_y + 1][new_x] == MAP_COLLECT)
+		// if (game->map[step_y + 1][step_x] == MAP_COLLECT)
 		// 	ft_printf("Collect");
-		// else if (game->map[new_y + 1][new_x] == MAP_EXIT)
+		// else if (game->map[step_y + 1][step_x] == MAP_EXIT)
 		// 	ft_printf("Exit");
-		game->img->player->instances->y += TILE;
+		PLAYER_Y += TILE;
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
 	}
 }
 
-void	move_left(t_game *game, int new_y, int new_x)
+void	move_left(t_game *game, int step_y, int step_x)
 {
-	if (game->map[new_y][new_x - 1] != MAP_WALL)
+	if (game->map[step_y][step_x - 1] != MAP_WALL)
 	{
-		// if (game->map[new_y][new_x - 1] == MAP_COLLECT)
+		// if (game->map[step_y][step_x - 1] == MAP_COLLECT)
 			// collect function?
-		// else if (game->map[new_y][new_x - 1] == MAP_EXIT)
+		// else if (game->map[step_y][step_x - 1] == MAP_EXIT)
 			// check exit status function
-		game->img->player->instances->x -= TILE;
+		PLAYER_X -= TILE;
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
 	}
 }
 
-void	move_right(t_game *game, int new_y, int new_x)
+void	move_right(t_game *game)
 {
-	if (game->map[new_y][new_x + 1] != MAP_WALL)
+	if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE + 1] != MAP_WALL)
 	{
-		// if (game->map[new_y][new_x + 1] == MAP_COLLECT)
-		// 	ft_printf("Collect");
-		// else if (game->map[new_y][new_x + 1] == MAP_EXIT)
-		// 	ft_printf("Exit");
-		game->img->player->instances->x += TILE;
+		PLAYER_X += TILE;
 		game->move_count++;
+		if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE] == MAP_COLLECT)
+			collect_found(game);
+		if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE] == MAP_EXIT)
+			exit_found(game);
 		ft_printf("MOVES: %i\n", game->move_count);
 	}
 }
@@ -59,23 +59,23 @@ void	move_right(t_game *game, int new_y, int new_x)
 void ft_key_hook(mlx_key_data_t keydata, void* param)
 {
 	t_game	*game;
-	int	new_y;
-	int	new_x;
+	int	step_y;
+	int	step_x;
 
 	game = param;
-	new_y = game->img->player->instances->y / TILE;
-	new_x = game->img->player->instances->x / TILE;
+	step_y = PLAYER_Y / TILE;
+	step_x = PLAYER_X / TILE;
 	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
 	{	
 		if (keydata.key == MLX_KEY_ESCAPE)
 			mlx_close_window(game->mlx);
 		else if (keydata.key == MLX_KEY_UP)
-			move_up(game, new_y, new_x);
+			move_up(game, step_y, step_x);
 		else if (keydata.key == MLX_KEY_DOWN)
-			move_down(game, new_y, new_x);
+			move_down(game, step_y, step_x);
 		else if (keydata.key == MLX_KEY_LEFT)
-			move_left(game, new_y, new_x);
+			move_left(game, step_y, step_x);
 		else if (keydata.key == MLX_KEY_RIGHT)
-			move_right(game, new_y, new_x);
+			move_right(game);
 	}
 }

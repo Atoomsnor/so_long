@@ -5,18 +5,17 @@
 int	init_game(t_game *game)
 {
 	game->move_count = 0;
-	game->collec_count = 0;
+	game->collect_count = 0;
+	game->collect_amount = 0;
 	game->mlx = mlx_init(game->map_width, game->map_heigth, "so_long", false); //check !fail
 	get_textures(game);
 	get_images(game);
-	// draw_map(game, game->img);
-	draw_map(game);
-	draw_conditions(game);
-	// ft_player(game);
-	// ft_test(game);
+	put_map(game);
+	put_objects(game);
 	mlx_key_hook(game->mlx, ft_key_hook, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
+	free_map(game->map);
 	free(game->txt);
 	free(game->img);
 	return (EXIT_SUCCESS);

@@ -31,7 +31,7 @@ void	get_images(t_game *game)
 	mlx_delete_texture(game->txt->enemy);
 }
 
-void	draw_map(t_game *game)
+void	put_map(t_game *game)
 {
 	int	x;
 	int	y;
@@ -56,7 +56,7 @@ void	draw_map(t_game *game)
 	}
 }
 
-void draw_conditions(t_game *game)
+void put_objects(t_game *game)
 {
 	int	x;
 	int	y;
@@ -70,7 +70,10 @@ void draw_conditions(t_game *game)
 			if (game->map[y][x] == MAP_PLAYER)
 				mlx_image_to_window(game->mlx, game->img->player, x * 128, y * 128);
 			if (game->map[y][x] == MAP_COLLECT)
+			{
 				mlx_image_to_window(game->mlx, game->img->collect, x * 128, y * 128);
+				game->collect_amount++;
+			}
 			x++;
 		}
 		y++;
