@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:19:57 by roversch          #+#    #+#             */
-/*   Updated: 2025/02/27 18:07:08 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:48:02 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	get_images(t_game *game)
 
 void	put_map(t_game *game)
 {
-	int	x;
 	int	y;
+	int	x;
 
 	y = 0;
 	while (game->map[y])
@@ -70,8 +70,8 @@ void	put_map(t_game *game)
 
 void	put_objects(t_game *game)
 {
-	int	x;
 	int	y;
+	int	x;
 
 	y = 0;
 	while (game->map[y])

@@ -8,11 +8,12 @@ CC		= cc
 INCLUDE	= -I ./include -I libft/ -I MLX42/include
 LIBS	= -L MLX42/build -lmlx42 -ldl -lglfw -pthread -lm
 CFLAGS	= -Wall -Wextra -Werror
+# DEBUG	= -fsanitize=address #remove if dont wanna debug
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LIBS) -o $(NAME)
+	$(CC) $(DEBUG) $(CFLAGS) $(OBJ) $(LIBFT) $(LIBS) -o $(NAME) 
 
 $(LIBFT): 
 	$(MAKE) -C libft

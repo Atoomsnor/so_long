@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:19:12 by roversch          #+#    #+#             */
-/*   Updated: 2025/02/27 17:27:44 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:32:05 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,56 +14,76 @@
 
 void	move_up(t_game *game)
 {
-	if (game->map[PLAYER_Y / TILE - 1][PLAYER_X / TILE] != MAP_WALL)
+	int	y;
+	int	x;
+
+	y = game->img->player->instances->y / TILE;
+	x = game->img->player->instances->x / TILE;
+	if (game->map[y - 1][x] != MAP_WALL)
 	{
-		PLAYER_Y -= TILE;
+		game->img->player->instances->y -= TILE;
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
-		if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE] == MAP_COLLECT)
+		if (game->map[y - 1][x] == MAP_COLLECT)
 			collect_found(game);
-		else if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE] == MAP_EXIT)
+		else if (game->map[y - 1][x] == MAP_EXIT)
 			exit_found(game);
 	}
 }
 
 void	move_down(t_game *game)
 {
-	if (game->map[PLAYER_Y / TILE + 1][PLAYER_X / TILE] != MAP_WALL)
+	int	y;
+	int	x;
+
+	y = game->img->player->instances->y / TILE;
+	x = game->img->player->instances->x / TILE;
+	if (game->map[y + 1][x] != MAP_WALL)
 	{
-		PLAYER_Y += TILE;
+		game->img->player->instances->y += TILE;
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
-		if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE] == MAP_COLLECT)
+		if (game->map[y + 1][x] == MAP_COLLECT)
 			collect_found(game);
-		else if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE] == MAP_EXIT)
+		else if (game->map[y + 1][x] == MAP_EXIT)
 			exit_found(game);
 	}
 }
 
 void	move_left(t_game *game)
 {
-	if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE - 1] != MAP_WALL)
+	int	y;
+	int	x;
+
+	y = game->img->player->instances->y / TILE;
+	x = game->img->player->instances->x / TILE;
+	if (game->map[y][x - 1] != MAP_WALL)
 	{
-		PLAYER_X -= TILE;
+		game->img->player->instances->x -= TILE;
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
-		if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE] == MAP_COLLECT)
+		if (game->map[y][x - 1] == MAP_COLLECT)
 			collect_found(game);
-		else if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE] == MAP_EXIT)
+		else if (game->map[y][x - 1] == MAP_EXIT)
 			exit_found(game);
 	}
 }
 
 void	move_right(t_game *game)
 {
-	if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE + 1] != MAP_WALL)
+	int	y;
+	int	x;
+
+	y = game->img->player->instances->y / TILE;
+	x = game->img->player->instances->x / TILE;
+	if (game->map[y][x + 1] != MAP_WALL)
 	{
-		PLAYER_X += TILE;
+		game->img->player->instances->x += TILE;
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
-		if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE] == MAP_COLLECT)
+		if (game->map[y][x + 1] == MAP_COLLECT)
 			collect_found(game);
-		else if (game->map[PLAYER_Y / TILE][PLAYER_X / TILE] == MAP_EXIT)
+		else if (game->map[y][x + 1] == MAP_EXIT)
 			exit_found(game);
 	}
 }

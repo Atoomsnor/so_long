@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:23:14 by roversch          #+#    #+#             */
-/*   Updated: 2025/02/27 17:27:48 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:32:20 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <stdlib.h>
 
+# define TRUE 0
+# define FALSE 1
+
 # define MAP_FLOOR '0'
 # define MAP_WALL '1'
 # define MAP_PLAYER 'P'
 # define MAP_COLLECT 'C'
 # define MAP_EXIT 'E'
 
-# define PLAYER_Y game->img->player->instances->y
-# define PLAYER_X game->img->player->instances->x
 # define TILE 128
 // # define MAP_ENEMY 'x'
 
@@ -62,7 +63,11 @@ typedef struct s_game
 	int					collect_amount;
 }	t_game;
 
+int		check_empty(char **map);
 int		check_rectangle(char **map);
+int		check_characters(char **map, int exit, int player, int collect);
+int		check_walls(char **map);
+int		check_map(char **map);
 
 void	map_size(t_game *game, char **map);
 void	free_map(char **map);
