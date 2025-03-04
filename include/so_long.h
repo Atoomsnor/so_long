@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:23:14 by roversch          #+#    #+#             */
-/*   Updated: 2025/03/03 18:32:20 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/04 18:04:04 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define MAP_COLLECT 'C'
 # define MAP_EXIT 'E'
 
-# define TILE 128
+# define TILE 400
 // # define MAP_ENEMY 'x'
 
 typedef struct s_textures
@@ -56,12 +56,15 @@ typedef struct s_game
 	struct s_images		*img;
 	mlx_t				*mlx;
 	char				**map;
+	char				**tempmap;
 	int					map_width;
 	int					map_heigth;
 	int					move_count;
 	int					collect_count;
 	int					collect_amount;
 }	t_game;
+
+int		check_extension(char *argv_map);
 
 int		check_empty(char **map);
 int		check_rectangle(char **map);
@@ -73,8 +76,14 @@ void	map_size(t_game *game, char **map);
 void	free_map(char **map);
 char	**read_map(char *argv_map);
 
+int		flood_player(char **map, int pos_y, int pos_x);
+void	flood_map(t_game *game, int pos_y, int pos_x);
+int		flood_solve(t_game *game, char *fd);
+
+
 void	get_textures(t_game *game);
 void	get_images(t_game *game);
+void	scale_images(t_game *game);
 void	put_map(t_game *game);
 void	put_objects(t_game *game);
 

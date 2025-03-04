@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:42:35 by roversch          #+#    #+#             */
-/*   Updated: 2025/03/03 18:33:57 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:32:24 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	collect_found(t_game *game)
 	y = game->img->player->instances->y;
 	x = game->img->player->instances->x;
 	i = 0;
-	while (i < game->collect_amount) //make sure to put failchek for 0collcts
+	while (i < game->collect_amount)
 	{
 		if ((y == game->img->collect->instances[i].y)
 			&& (x == game->img->collect->instances[i].x))
