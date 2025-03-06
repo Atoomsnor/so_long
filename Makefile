@@ -31,3 +31,5 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+# Use: git clone --recurse-submodules ,to import MLX42 alongside
