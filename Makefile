@@ -9,10 +9,16 @@ INCLUDE	= -I ./include -I libft/ -I MLX42/include
 LIBS	= -L MLX42/build -lmlx42 -ldl -lglfw -pthread -lm
 CFLAGS	= -Wall -Wextra -Werror
 
-all: $(NAME)
+all: MLX42_BUILD $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): $(LIBFT) $(OBJ) MLX42
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LIBS) -o $(NAME) 
+
+MLX42_BUILD:
+	@cd MLX42 && cmake -B build && cmake --build build -j4
+
+MLX42_CLEAN:
+	@cd MLX42 && cmake --build build --target clean
 
 $(LIBFT): 
 	$(MAKE) -C libft
@@ -20,7 +26,7 @@ $(LIBFT):
 %.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-clean:
+clean: MLX42_CLEAN
 	@rm -f $(OBJ)
 	$(MAKE) -C libft clean
 
