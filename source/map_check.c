@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:18:57 by roversch          #+#    #+#             */
-/*   Updated: 2025/03/06 15:11:18 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:45:25 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ int	check_map(char **map)
 		return (ft_printf("Error\nMap is empty\n"), FALSE);
 	if (check_characters(map, exit, player, collect) == FALSE)
 		return (ft_printf("Error\nMap has invalid characters\n"), FALSE);
-	if (check_rectangle(map) == FALSE)
-		return (ft_printf("Error\nMap is not rectangle\n"), FALSE);
 	if (check_walls(map) == FALSE)
 		return (ft_printf("Error\nMap is not surrounded by walls\n"), FALSE);
+	if (check_rectangle(map) == FALSE)
+		return (ft_printf("Error\nMap is not rectangle\n"), FALSE);
 	return (TRUE);
 }

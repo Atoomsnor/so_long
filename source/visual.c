@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:19:57 by roversch          #+#    #+#             */
-/*   Updated: 2025/03/06 15:19:31 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:20:26 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,17 @@ void	put_map(t_game *game)
 		x = 0;
 		while (game->map[y][x])
 		{
-			mlx_image_to_window(game->mlx, game->img->floor, x * TILE, y * TILE);
+			mlx_image_to_window(game->mlx, game->img->floor,
+				x * TILE, y * TILE);
 			if (game->map[y][x] == MAP_WALL)
-				mlx_image_to_window(game->mlx, game->img->wall, x * TILE, y * TILE);
+				mlx_image_to_window(game->mlx, game->img->wall,
+					x * TILE, y * TILE);
 			if (game->map[y][x] == MAP_EXIT)
 			{
-				mlx_image_to_window(game->mlx, game->img->open, x * TILE, y * TILE);
-				mlx_image_to_window(game->mlx, game->img->exit, x * TILE, y * TILE);
+				mlx_image_to_window(game->mlx, game->img->open,
+					x * TILE, y * TILE);
+				mlx_image_to_window(game->mlx, game->img->exit,
+					x * TILE, y * TILE);
 			}
 			x++;
 		}
@@ -87,10 +91,12 @@ void	put_objects(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == MAP_PLAYER)
-				mlx_image_to_window(game->mlx, game->img->player, x * TILE, y * TILE);
+				mlx_image_to_window(game->mlx, game->img->player,
+					x * TILE, y * TILE);
 			if (game->map[y][x] == MAP_COLLECT)
 			{
-				mlx_image_to_window(game->mlx, game->img->collect, x * TILE, y * TILE);
+				mlx_image_to_window(game->mlx, game->img->collect,
+					x * TILE, y * TILE);
 				game->collect_amount++;
 			}
 			x++;
