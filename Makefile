@@ -7,13 +7,12 @@ OBJ		= $(SRCS:.c=.o)
 CC		= cc
 INCLUDE	= -I ./include -I libft/ -I MLX42/include
 LIBS	= -L MLX42/build -lmlx42 -ldl -lglfw -pthread -lm
-CFLAGS	= -Wall -Wextra -Werror
-# DEBUG	= -fsanitize=address #remove if dont wanna debug
+CFLAGS	= -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(DEBUG) $(CFLAGS) $(OBJ) $(LIBFT) $(LIBS) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LIBS) -o $(NAME) 
 
 $(LIBFT): 
 	$(MAKE) -C libft

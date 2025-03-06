@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:16:38 by roversch          #+#    #+#             */
-/*   Updated: 2025/03/06 15:08:13 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:03:20 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	main(int argc, char **argv)
 		return (free_map(game.map), FALSE);
 	map_size(&game, game.map);
 	if (flood_solve(&game, argv[1]) == FALSE)
-		return (FALSE);
+		return (free_map(game.map), FALSE);
 	if (init_game(&game) == FALSE)
-		return (FALSE);
+		return (free_map(game.map), FALSE);
 	return (0);
 }
