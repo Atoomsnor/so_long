@@ -7,7 +7,7 @@ OBJ		= $(SRCS:.c=.o)
 CC		= cc
 INCLUDE	= -I ./include -I libft/ -I MLX42/include
 LIBS	= -L MLX42/build -lmlx42 -ldl -lglfw -pthread -lm
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror
 
 all: $(NAME)
 
