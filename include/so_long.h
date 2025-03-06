@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:23:14 by roversch          #+#    #+#             */
-/*   Updated: 2025/03/04 18:04:04 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:07:45 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,13 @@
 
 # define TRUE 0
 # define FALSE 1
+# define TILE 128
 
 # define MAP_FLOOR '0'
 # define MAP_WALL '1'
 # define MAP_PLAYER 'P'
 # define MAP_COLLECT 'C'
 # define MAP_EXIT 'E'
-
-# define TILE 400
-// # define MAP_ENEMY 'x'
 
 typedef struct s_textures
 {
@@ -57,7 +55,7 @@ typedef struct s_game
 	mlx_t				*mlx;
 	char				**map;
 	char				**tempmap;
-	int					map_width;
+	size_t				map_width;
 	int					map_heigth;
 	int					move_count;
 	int					collect_count;
@@ -65,6 +63,11 @@ typedef struct s_game
 }	t_game;
 
 int		check_extension(char *argv_map);
+void	free_map(char **map);
+void	map_size(t_game *game, char **map);
+
+char	**get_map(char *argv);
+char	**get_lines(char *argv, int *lines);
 
 int		check_empty(char **map);
 int		check_rectangle(char **map);
@@ -72,18 +75,14 @@ int		check_characters(char **map, int exit, int player, int collect);
 int		check_walls(char **map);
 int		check_map(char **map);
 
-void	map_size(t_game *game, char **map);
-void	free_map(char **map);
-char	**read_map(char *argv_map);
-
 int		flood_player(char **map, int pos_y, int pos_x);
 void	flood_map(t_game *game, int pos_y, int pos_x);
-int		flood_solve(t_game *game, char *fd);
-
+int		flood_check(char **tempmap);
+int		flood_solve(t_game *game, char *argv);
 
 void	get_textures(t_game *game);
 void	get_images(t_game *game);
-void	scale_images(t_game *game);
+void	get_scale(t_game *game);
 void	put_map(t_game *game);
 void	put_objects(t_game *game);
 
@@ -91,9 +90,9 @@ void	move_up(t_game *game);
 void	move_down(t_game *game);
 void	move_left(t_game *game);
 void	move_right(t_game *game);
-void	ft_key_hook(mlx_key_data_t keydata, void* param);
+void	move_key_hook(mlx_key_data_t keydata, void* param);
 
-void	collect_found(t_game *game);
-void	exit_found(t_game *game);
+void	found_collect(t_game *game);
+void	found_exit(t_game *game);
 
 #endif

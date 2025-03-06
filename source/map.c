@@ -6,18 +6,15 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:18:04 by roversch          #+#    #+#             */
-/*   Updated: 2025/03/04 16:53:46 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:17:31 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <fcntl.h>
-#include <stdio.h>
 #include <unistd.h>
 
-// void	check_extension
-
-void	map_size(t_game *game, char **map)
+void	get_map_size(t_game *game, char **map)
 {
 	int	i;
 
@@ -28,90 +25,57 @@ void	map_size(t_game *game, char **map)
 	game->map_heigth = i * TILE;
 }
 
-void	free_map(char **map)
+char	**get_lines(char *argv, int *lines)
 {
-	int	i;
+	int		fd;
+	char	**map;
+	char	*temp;
 
-	i = 0;
-	while (map[i])
+	*lines = 0;
+	fd = open(argv, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	temp = get_next_line(fd);
+	while (temp)
 	{
-		free(map[i]);
-		i++;
+		(*lines)++;
+		free(temp);
+		temp = get_next_line(fd);
 	}
-	free(map);
+	close(fd);
+	if (*lines == 0)
+		return (NULL);
+	map = malloc(sizeof(char *) * (*lines + 1));
+	if (!map)
+		return (NULL);
+	return (map);
 }
 
-char	**read_map(char *argv_map)
+char	**get_map(char *argv)
 {
 	int		i;
 	int		fd;
 	int		lines;
 	char	**map;
-	char	*temp;
 
-	lines = 0;
-	fd = open(argv_map, O_RDONLY);
-	while ((temp = get_next_line(fd)) != NULL)
-	{
-		lines++;
-		free(temp);
-	}
-	close(fd);
-	map = malloc(sizeof(char *) * (lines + 1));
-	fd = open(argv_map, O_RDONLY);
-	i = 0;
-	while (i < lines)
+	map = get_lines(argv, &lines);
+	if (!map)
+		return (NULL);
+	fd = open(argv, O_RDONLY);
+	if (fd < 0)
+		return (free(map), NULL);
+	i = -1;
+	while (++i < lines)
 	{
 		map[i] = get_next_line(fd);
-		// printf("%s", map[i]);
-		i++;
+		if (!map[i])
+		{
+			free_map(map);
+			close(fd);
+			return (NULL);
+		}
 	}
-	// map[i] = NULL; // check this, can prob remove?
+	map[i] = NULL;
 	close(fd);
 	return (map);
 }
-
-// char	**read_map(char *argv_map)
-// {
-// 	int		i;
-// 	int		fd;
-// 	int		lines;
-// 	char	**map;
-// 	char	*temp;
-
-// 	lines = 0;
-// 	fd = open(argv_map, O_RDONLY);
-// 	if (fd < 0)
-// 		return (0);
-// 	while ((temp = get_next_line(fd)) != NULL)
-// 	{
-// 		lines++;
-// 		free(temp);
-// 	}
-// 	close(fd);
-// 	map = malloc(sizeof(char *) * (lines + 1));
-// 	if (!map)
-// 		return (0);
-// 	fd = open(argv_map, O_RDONLY);
-// 	if (fd < 0)
-// 	{
-// 		free(map);
-// 		return (0);
-// 	}
-// 	i = 0;
-// 	while (i < lines)
-// 	{
-// 		map[i] = get_next_line(fd);
-// 		if (!map[i])
-// 		{
-// 			free_map(map);
-// 			close(fd);
-// 			return (0);
-// 		}
-// 		printf("%s", map[i]);
-// 		i++;
-// 	}
-// 	map[i] = NULL;
-// 	close(fd);
-// 	return (map);
-// }

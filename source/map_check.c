@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:18:57 by roversch          #+#    #+#             */
-/*   Updated: 2025/03/03 18:16:52 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:11:18 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	check_empty(char **map)
 	return (FALSE);
 }
 
-int	check_rectangle(char **map) //!doesnt work if theres no empty line under the map
+int	check_rectangle(char **map)
 {
 	int		i;
-	size_t		len;
+	size_t	len;
 
 	i = 1;
 	len = ft_strlen(map[0]);
-	while(map[i])
+	while (map[i])
 	{
 		if (ft_strlen(map[i]) != len)
 			return (FALSE);

@@ -6,13 +6,13 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:42:35 by roversch          #+#    #+#             */
-/*   Updated: 2025/03/04 12:32:24 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:13:02 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	collect_found(t_game *game)
+void	found_collect(t_game *game)
 {
 	int	i;
 	int	y;
@@ -30,14 +30,14 @@ void	collect_found(t_game *game)
 			game->map[y / TILE][x / TILE] = MAP_FLOOR;
 			game->collect_count++;
 			if (game->collect_count == game->collect_amount)
-				game->img->exit->instances[0].enabled = false;	
+				game->img->exit->instances[0].enabled = false;
 			return ;
 		}
 		i++;
 	}
 }
 
-void	exit_found(t_game *game)
+void	found_exit(t_game *game)
 {
 	if (game->collect_count == game->collect_amount)
 	{

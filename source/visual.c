@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:19:57 by roversch          #+#    #+#             */
-/*   Updated: 2025/03/04 17:54:47 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:19:31 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	get_textures(t_game *game)
 {
 	game->txt = ft_calloc(1, sizeof(t_textures));
-	game->txt->floor = mlx_load_png("./images/background1.png");
-	game->txt->wall = mlx_load_png("./images/2wall128.png");
+	game->txt->floor = mlx_load_png("./images/background128.png");
+	game->txt->wall = mlx_load_png("./images/wall128.png");
 	game->txt->player = mlx_load_png("./images/mouse128.png");
 	game->txt->collect = mlx_load_png("./images/cheese128.png");
 	game->txt->exit = mlx_load_png("./images/exit128.png");
@@ -40,7 +40,7 @@ void	get_images(t_game *game)
 	mlx_delete_texture(game->txt->open);
 }
 
-void	scale_images(t_game *game)
+void	get_scale(t_game *game)
 {
 	mlx_resize_image(game->img->floor, TILE, TILE);
 	mlx_resize_image(game->img->wall, TILE, TILE);

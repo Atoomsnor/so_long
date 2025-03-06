@@ -6,7 +6,7 @@
 /*   By: roversch <roversch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:19:12 by roversch          #+#    #+#             */
-/*   Updated: 2025/03/03 18:32:05 by roversch         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:10:43 by roversch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	move_up(t_game *game)
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
 		if (game->map[y - 1][x] == MAP_COLLECT)
-			collect_found(game);
+			found_collect(game);
 		else if (game->map[y - 1][x] == MAP_EXIT)
-			exit_found(game);
+			found_exit(game);
 	}
 }
 
@@ -44,9 +44,9 @@ void	move_down(t_game *game)
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
 		if (game->map[y + 1][x] == MAP_COLLECT)
-			collect_found(game);
+			found_collect(game);
 		else if (game->map[y + 1][x] == MAP_EXIT)
-			exit_found(game);
+			found_exit(game);
 	}
 }
 
@@ -63,9 +63,9 @@ void	move_left(t_game *game)
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
 		if (game->map[y][x - 1] == MAP_COLLECT)
-			collect_found(game);
+			found_collect(game);
 		else if (game->map[y][x - 1] == MAP_EXIT)
-			exit_found(game);
+			found_exit(game);
 	}
 }
 
@@ -82,13 +82,13 @@ void	move_right(t_game *game)
 		game->move_count++;
 		ft_printf("MOVES: %i\n", game->move_count);
 		if (game->map[y][x + 1] == MAP_COLLECT)
-			collect_found(game);
+			found_collect(game);
 		else if (game->map[y][x + 1] == MAP_EXIT)
-			exit_found(game);
+			found_exit(game);
 	}
 }
 
-void	ft_key_hook(mlx_key_data_t keydata, void* param)
+void	move_key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
 
